@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convite de Aniversário - Yumi Faz 2 Anos! 🌸🐄</title>
+  
+  <!-- Meta tags para compartilhamento WhatsApp / Redes Sociais -->
+  <meta property="og:title" content="Yumi Faz 2 Anos! 🌸 Convite Fazendinha">
+  <meta property="og:description" content="Você está convidado para celebrar os 2 aninhos da Yumi na Fazendinha! Confirme sua presença aqui.">
+  <meta property="og:type" content="website">
+
+  <!-- Fontes do Google: Fredoka (Títulos fofos) + Quicksand (Texto suave) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS Vanilla -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gingham">
+
+  <!-- Container do Canvas de Confetti para Sucesso do RSVP -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Container Principal Responsivo -->
+  <div class="app-container">
+
+    <!-- Container de Balões Flutuantes em Segundo Plano -->
+    <div class="balloons-container" id="balloons-container"></div>
+
+    <!-- ====================================================================
+         1. HERO / TELA INICIAL DO CONVITE (Proporção 9:16 Tela Cheia Mobile)
+         ==================================================================== -->
+    <section class="hero-screen">
+      <!-- Imagem Principal da Fazendinha -->
+      <div class="hero-bg-layer">
+        <img 
+          src="assets/images/yumi_farm_main.jpg" 
+          alt="Fazendinha da Yumi Fundo" 
+          class="hero-bg-img"
+          referrerPolicy="no-referrer"
+        />
+        <div class="hero-bg-gradient-fade"></div>
+      </div>
+
+      <!-- Conteúdo da Tela Inicial: Placa de Madeira Suspensa no Topo da Imagem -->
+      <div class="hero-content">
+        <div class="hanging-sign-wrapper">
+          <!-- Cordas de Suporte nas pontas da placa -->
+          <div class="rope-left"></div>
+          <div class="rope-right"></div>
+
+          <!-- Subtítulo em cima da placa -->
+          <p class="invited-text">Você está convidado para</p>
+
+          <!-- Conjunto da Placa de Madeira com Folhinhas Delicadas Decorativas -->
+          <div class="wooden-farm-sign-assembly">
+            <!-- Folhinhas e Florzinhas Delicadas nos Cantos da Placa -->
+            <svg class="delicate-leaves leaves-left" viewBox="0 0 60 50" fill="none">
+              <path d="M40 45C25 40 10 25 5 5C18 10 32 20 40 32Z" fill="#16a34a"/>
+              <path d="M45 48C30 35 18 30 10 15C22 20 35 32 42 42Z" fill="#4ade80"/>
+              <circle cx="42" cy="18" r="7" fill="#f472b6"/>
+              <circle cx="42" cy="18" r="3" fill="#fde047"/>
+            </svg>
+
+            <svg class="delicate-leaves leaves-right" viewBox="0 0 60 50" fill="none">
+              <path d="M20 45C35 40 50 25 55 5C42 10 28 20 20 32Z" fill="#16a34a"/>
+              <path d="M15 48C30 35 42 30 50 15C38 20 25 32 18 42Z" fill="#4ade80"/>
+              <circle cx="18" cy="18" r="7" fill="#f472b6"/>
+              <circle cx="18" cy="18" r="3" fill="#fde047"/>
+            </svg>
+
+            <!-- Placa de Madeira Clara com Textura Natural -->
+            <div class="single-wooden-board">
+              <!-- Parafusos Metálicos de Fixação -->
+              <span class="screw screw-left"></span>
+              <span class="screw screw-right"></span>
+
+              <!-- Texto Escrito na Madeira -->
+              <div class="sign-text-overlay">
+                <span class="sign-line-1">2 aninhos</span>
+                <span class="sign-line-2">da Yumi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicador Fofo para Deslizar e Ver Mais Detalhes -->
+      <div class="scroll-down-hint">
+        <span>Deslize para ver mais</span>
+        <span class="scroll-arrow">👇</span>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         2. DETALHES DO EVENTO & ROSA QUADRICULADINHO (BACKGROUND XADREZ ROSA)
+         ==================================================================== -->
+    <div class="event-details-wrapper bg-gingham">
+
+      <!-- Cabeçalho na parte de Xadrez Rosa (Boas-vindas) -->
+      <div class="invite-header-section reveal-on-scroll">
+        <!-- Mensagem Convidativa -->
+        <p class="hero-welcome-msg">
+          A Fazendinha da Yumi está em festa! Venha celebrar esse dia tão especial recheado de alegria, bichinhos e diversão! 🌾🌸
+        </p>
+      </div>
+
+      <!-- Card de Informações Básicas do Evento -->
+      <div class="event-info-card reveal-on-scroll">
+        <!-- Data -->
+        <div class="info-item">
+          <div class="info-icon-wrapper">📅</div>
+          <div class="info-details">
+            <h3>Data</h3>
+            <p>Sábado, 24 de Outubro de 2026</p>
+          </div>
+        </div>
+
+        <!-- Horário -->
+        <div class="info-item">
+          <div class="info-icon-wrapper">⏰</div>
+          <div class="info-details">
+            <h3>Horário</h3>
+            <p>A partir das 16:00 horas</p>
+          </div>
+        </div>
+
+        <!-- Local -->
+        <div class="info-item">
+          <div class="info-icon-wrapper">📍</div>
+          <div class="info-details">
+            <h3>Local</h3>
+            <p>Espaço Villa Kids - Fazendinha<br><small style="color:#78350f; font-weight:normal;">Rua das Flores, 123 - Jardins, São Paulo/SP</small></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contador Regressivo (Countdown) -->
+      <div class="countdown-section reveal-on-scroll">
+        <div class="countdown-title">
+          <span>⏳</span> Faltam para o grande dia:
+        </div>
+        <div class="countdown-grid">
+          <div class="countdown-box">
+            <div class="countdown-value" id="cd-days">00</div>
+            <div class="countdown-label">Dias</div>
+          </div>
+          <div class="countdown-box">
+            <div class="countdown-value" id="cd-hours">00</div>
+            <div class="countdown-label">Horas</div>
+          </div>
+          <div class="countdown-box">
+            <div class="countdown-value" id="cd-minutes">00</div>
+            <div class="countdown-label">Min</div>
+          </div>
+          <div class="countdown-box">
+            <div class="countdown-value" id="cd-seconds">00</div>
+            <div class="countdown-label">Seg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões CTA Principal "Confirmar Presença" e Interatividade de Balões -->
+      <div style="margin-top: 1.5rem; padding: 0 1rem; display: flex; flex-direction: column; gap: 10px;">
+        <a href="#rsvp-section" class="btn-primary">
+          <span>Confirme sua Presença</span>
+          <span style="font-size: 1.4rem;">🌸</span>
+        </a>
+
+        <button id="btn-hero-balloons" class="btn-secondary" style="width: 100%;">
+          <span>🎈 Estourar Balões de Festa!</span>
+        </button>
+      </div>
+
+    <!-- ====================================================================
+         2. SEÇÃO DE PROGRAMAÇÃO & COMO CHEGAR
+         ==================================================================== -->
+    <section class="section timeline-section reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Atrações da Fazendinha</span>
+        <h2 class="section-title">Programação do Dia 🐥</h2>
+      </div>
+
+      <div class="timeline-list">
+        <div class="timeline-item">
+          <div class="timeline-badge"></div>
+          <div class="timeline-content">
+            <span class="timeline-time">16:00</span>
+            <span class="timeline-text">Chegada dos convidados & Recepção na Fazendinha 🌾</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-badge"></div>
+          <div class="timeline-content">
+            <span class="timeline-time">17:00</span>
+            <span class="timeline-text">Recreação infantil, oficinas e brincadeiras com animais 🐄</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-badge"></div>
+          <div class="timeline-content">
+            <span class="timeline-time">18:30</span>
+            <span class="timeline-text">Hora do Parabéns e bolo da Yumi! 🎂✨</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-badge"></div>
+          <div class="timeline-content">
+            <span class="timeline-time">19:30</span>
+            <span class="timeline-text">Encerramento e distribuição de lembrancinhas fofas 🎁</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões de Ação Úteis (Adicionar ao Calendário & Como Chegar) -->
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 2rem; padding: 0 0.5rem;">
+        <a href="https://maps.google.com/?q=Rua+das+Flores+123+Sao+Paulo" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <span>📍 Abrir no Google Maps</span>
+        </a>
+        <button id="btn-add-calendar" class="btn-secondary">
+          <span>📅 Adicionar ao Calendário (.ics)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. SEÇÃO FORMULÁRIO RSVP / CONFIRMAÇÃO DE PRESENÇA
+         ==================================================================== -->
+    <section id="rsvp-section" class="section rsvp-section reveal-on-scroll">
+      <div class="section-header">
+        <span class="section-tag">Sua presença é essencial!</span>
+        <h2 class="section-title">Confirme sua presença nesse dia especial 🌸</h2>
+      </div>
+
+      <!-- Formulário RSVP -->
+      <form id="rsvp-form">
+        <!-- Campo: Nome Completo -->
+        <div class="form-group">
+          <label class="form-label" for="guest-name">Seu Nome Completo <span class="req">*</span></label>
+          <input type="text" id="guest-name" class="form-control" placeholder="Digite seu nome e sobrenome" autocomplete="name">
+          <span class="error-message" id="name-error">Por favor, informe seu nome.</span>
+        </div>
+
+        <!-- Campo: Vai Comparecer? (Toggle Sim / Não) -->
+        <div class="form-group">
+          <label class="form-label">Você vai comparecer? <span class="req">*</span></label>
+          <div class="attendance-toggle-grid">
+            <label class="toggle-option">
+              <input type="radio" name="attending" id="attending-yes" value="sim" checked>
+              <div class="toggle-card">
+                <span class="toggle-icon">🐮</span>
+                <span class="toggle-text">Sim, vou com certeza!</span>
+              </div>
+            </label>
+
+            <label class="toggle-option">
+              <input type="radio" name="attending" id="attending-no" value="nao">
+              <div class="toggle-card">
+                <span class="toggle-icon">💔</span>
+                <span class="toggle-text">Não poderei ir</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Seção: Número de Acompanhantes (Aparece se "Sim") -->
+        <div class="companions-container" id="companions-section">
+          <label class="form-label" style="text-align: center; margin-bottom: 0;">Número de Acompanhantes (além de você):</label>
+          <div class="stepper-control">
+            <button type="button" class="btn-stepper" id="btn-companion-minus">-</button>
+            <div class="stepper-value" id="companion-count">0</div>
+            <button type="button" class="btn-stepper" id="btn-companion-plus">+</button>
+          </div>
+          <div class="companions-summary" id="companion-summary">Apenas você (1 pessoa)</div>
+        </div>
+
+        <!-- Botão de Envio -->
+        <button type="submit" class="btn-primary" style="margin-top: 1rem;">
+          <span>Enviar Confirmação</span>
+          <span style="font-size: 1.3rem;">✨</span>
+        </button>
+      </form>
+
+      <!-- Cartão de Sucesso Pós-Confirmação -->
+      <div class="rsvp-success-card" id="rsvp-success-card">
+        <div class="success-icon">🎉</div>
+        <h3 class="success-title">Presença Confirmada!</h3>
+        <p class="success-desc">Mal podemos esperar para celebrar com você os 2 aninhos da Yumi na Fazendinha! 💕🌷</p>
+        <button type="button" class="btn-secondary" onclick="document.getElementById('rsvp-success-card').style.display='none'; document.getElementById('rsvp-form').style.display='block';">
+          <span>Editar minha resposta</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. RODAPÉ
+         ==================================================================== -->
+    <footer class="footer">
+      <div class="footer-text">Com todo o carinho, a família da Yumi 🐄🌷</div>
+    </footer>
+    </div> <!-- /event-details-wrapper -->
+
+  </div> <!-- /app-container -->
+
+  <!-- ====================================================================
+       MODAL DE ADMINISTRAÇÃO DOS PAIS (VISUALIZAR RESPOSTAS)
+       ==================================================================== -->
+  <div class="admin-modal-overlay" id="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title">Lista de Confirmações (RSVP)</h3>
+        <button class="btn-close-modal" id="btn-close-admin">&times;</button>
+      </div>
+
+      <div id="guest-stats" style="margin-bottom: 1rem; font-size: 0.95rem; color: var(--marrom-texto);"></div>
+
+      <div style="overflow-x: auto;">
+        <table class="guest-list-table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Vai?</th>
+              <th>Total</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody id="guest-table-body">
+            <!-- Preenchido via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+        <button id="btn-clear-guests" style="background: none; border: 1px solid #ef4444; color: #ef4444; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">
+          Limpar Lista Local
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Componente Toast de Notificação -->
+  <div id="toast" class="toast-notification"></div>
+
+  <!-- JavaScript Vanilla -->
+  <script src="script.js"></script>
+</body>
+</html>

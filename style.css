@@ -1,0 +1,1328 @@
+/* ==========================================================================
+   CONVITE DIGITAL FAZENDINHA DA YUMI - 2 ANOS
+   Arquivo de Estilos (style.css)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIÁVEIS DO TEMA (Fácil personalização de cores e medidas)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Paleta Rosa & Fazendinha */
+  --rosa-chiclete: #f472b6;
+  --rosa-vibrante: #ec4899;
+  --rosa-escuro: #db2777;
+  --rosa-blush: #fbcfe8;
+  --rosa-pastel: #fdf2f8;
+  --rosa-suave: #fff1f2;
+  --rosa-velho: #be185d;
+
+  /* Tons de Creme e Fundo */
+  --creme-fundo: #fffdfa;
+  --creme-card: #ffffff;
+  --creme-amarelado: #fef3c7;
+
+  /* Tons Maderados / Rústicos */
+  --madeira-clara: #fde68a;
+  --madeira-tom: #f59e0b;
+  --madeira-borda: #d97706;
+  --marrom-texto: #582f0e;
+  --marrom-suave: #78350f;
+
+  /* Detalhes e Mascote (Vaquinha & Natureza) */
+  --vaquinha-preto: #292524;
+  --vaquinha-rosa: #f472b6;
+  --verde-folha: #86efac;
+  --verde-escuro: #16a34a;
+  --amarelo-sol: #fde047;
+
+  /* Neon */
+  --neon-rosa: #ff2a8d;
+  --neon-glow: rgba(255, 42, 141, 0.6);
+
+  /* Sombras e Raios de Borda */
+  --sombra-suave: 0 10px 25px -5px rgba(236, 72, 153, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --sombra-card: 0 20px 35px -10px rgba(180, 83, 9, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --sombra-neon: 0 0 15px var(--neon-rosa), 0 0 30px var(--neon-rosa), 0 0 45px rgba(255, 42, 141, 0.4);
+  
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 9999px;
+
+  /* Tipografia */
+  --fonte-titulo: 'Fredoka', 'Baloo 2', cursive, sans-serif;
+  --fonte-corpo: 'Quicksand', 'Nunito', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET E ESTILOS BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  background-color: var(--creme-fundo);
+  color: var(--marrom-texto);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Padrão Xadrez (Gingham) Rosa e Branco suave nos fundos */
+.bg-gingham {
+  background-color: var(--rosa-pastel);
+  background-image: 
+    linear-gradient(45deg, rgba(244, 114, 182, 0.08) 25%, transparent 25%), 
+    linear-gradient(-45deg, rgba(244, 114, 182, 0.08) 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, rgba(244, 114, 182, 0.08) 75%), 
+    linear-gradient(-45deg, transparent 75%, rgba(244, 114, 182, 0.08) 75%);
+  background-size: 24px 24px;
+  background-position: 0 0, 0 12px, 12px -12px, -12px 0px;
+}
+
+/* Container Principal Centralizado com Largura Máxima Responsiva */
+.app-container {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--creme-fundo);
+  box-shadow: 0 0 50px rgba(217, 119, 6, 0.08);
+  position: relative;
+  overflow: hidden;
+  border-left: 1px solid rgba(251, 207, 232, 0.5);
+  border-right: 1px solid rgba(251, 207, 232, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   3. ELEMENTOS DECORATIVOS & ANIMAÇÕES
+   -------------------------------------------------------------------------- */
+
+/* Balões Flutuantes em Segundo Plano */
+.balloons-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  width: 44px;
+  height: 56px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  opacity: 0.7;
+  animation: floatUp 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 16px;
+  background-color: rgba(217, 119, 6, 0.3);
+}
+
+.balloon::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 8px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: rotate(-30deg);
+}
+
+/* Variações de Balões */
+.balloon-rosa { background: linear-gradient(135deg, #f472b6, #db2777); }
+.balloon-blush { background: linear-gradient(135deg, #fbcfe8, #f472b6); }
+.balloon-transparente { background: rgba(255, 255, 255, 0.65); border: 2px solid var(--rosa-chiclete); }
+.balloon-amarelo { background: linear-gradient(135deg, #fef08a, #fde047); }
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.9);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(-50vh) rotate(8deg) scale(1.05);
+  }
+  90% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(-8deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Borda de Madeira Estilo Rústico/Fazendinha */
+.wooden-frame {
+  background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+  border: 3px solid var(--madeira-borda);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), var(--sombra-card);
+  position: relative;
+}
+
+.wooden-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background-color: var(--creme-amarelado);
+  border: 2px dashed var(--madeira-borda);
+  border-radius: var(--radius-pill);
+  font-family: var(--fonte-titulo);
+  font-size: 0.9rem;
+  color: var(--marrom-suave);
+}
+
+/* Cenário de Fundo Completo da Fazendinha Ajustado para a Tela Inicial (Proporção 9:16 sem Zoom/Corte) */
+.hero-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 100dvh;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  overflow: hidden;
+  text-align: center;
+  background-color: var(--rosa-pastel);
+  border-bottom: 3px solid var(--rosa-blush);
+  box-shadow: 0 10px 25px rgba(236, 72, 153, 0.15);
+}
+
+.hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--rosa-pastel);
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Exibe 100% da imagem sem zoom e sem cortar nada */
+  object-position: center center;
+  filter: brightness(0.98) saturate(1.05);
+}
+
+.hero-bg-gradient-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(
+    180deg, 
+    transparent 0%, 
+    rgba(253, 242, 248, 0.5) 60%, 
+    #fdf2f8 100%
+  );
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.scroll-down-hint {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--fonte-titulo);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--marrom-texto);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--rosa-blush);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  margin-top: auto;
+  margin-bottom: 0.25rem;
+  animation: bounceHint 2s ease-in-out infinite;
+}
+
+@keyframes bounceHint {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Wrapper dos Detalhes do Evento com Fundo Rosa Quadriculadinho (Xadrez Gingham) */
+.event-details-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* Seção de Cabeçalho do Convite no Fundo Xadrez Rosa */
+.invite-header-section {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.farm-animals-banner {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 6;
+  flex-wrap: wrap;
+}
+
+.farm-animal-badge {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid var(--rosa-blush);
+  color: var(--marrom-suave);
+  font-family: var(--fonte-titulo);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.hero-welcome-msg {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--marrom-texto);
+  padding: 0.5rem 1.25rem 0 1.25rem;
+  line-height: 1.5;
+  margin: 0 auto 0.5rem auto;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
+  max-width: 480px;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   4. CABEÇALHO & SEÇÕES
+   -------------------------------------------------------------------------- */
+.section {
+  padding: 2.5rem 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Placa de Madeira Suspensa por Cordas com Balanço de Vento */
+.hanging-sign-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 92%;
+  max-width: 350px;
+  margin: 0 auto 0.5rem auto;
+  padding-top: 36px; /* Espaço para a legenda em cima da placa */
+  transform-origin: 50% -100px; /* Pivô do balanço no topo fora da tela */
+  animation: gentleWindSway 6s ease-in-out infinite;
+}
+
+/* Animação Suave de Balanço no Vento */
+@keyframes gentleWindSway {
+  0% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(-3deg);
+  }
+}
+
+/* Cordas de Suporte de Cânhamo - Estendem-se até sumir no topo da tela */
+.rope-left, .rope-right {
+  position: absolute;
+  top: -160px; /* Vai além do topo da página para sumir off-screen */
+  width: 8px;
+  height: 230px; /* Comprimento total garantindo que não veja o fim da corda */
+  background: repeating-linear-gradient(
+    45deg,
+    #d97706,
+    #d97706 4px,
+    #b45309 4px,
+    #b45309 8px
+  );
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+.rope-left {
+  left: 28px;
+}
+
+.rope-right {
+  right: 28px;
+}
+
+/* Subtítulo: "Você está convidado para" (em cima da placa, entre as cordas, sem caixa ou sombra) */
+.invited-text {
+  font-family: var(--fonte-titulo);
+  font-size: 0.88rem;
+  color: #78350f;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  z-index: 5;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  text-shadow: none !important;
+  display: block;
+}
+
+/* Conjunto da Placa de Madeira com Folhagens */
+.wooden-farm-sign-assembly {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Folhinhas e Florzinhas Delicadas Discretas nos Cantos da Placa */
+.delicate-leaves {
+  position: absolute;
+  width: 42px;
+  height: 36px;
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.leaves-left {
+  top: -10px;
+  left: -10px;
+  transform: rotate(-10deg);
+}
+
+.leaves-right {
+  top: -10px;
+  right: -10px;
+  transform: rotate(10deg);
+}
+
+/* Placa Única de Madeira Rústica de Peça Inteira */
+.single-wooden-board {
+  position: relative;
+  width: 100%;
+  min-height: 135px;
+  background: #b45309;
+  background-image: 
+    linear-gradient(180deg, #d97706 0%, #b45309 50%, #78350f 100%),
+    repeating-linear-gradient(90deg, rgba(69,26,3,0.1) 0px, rgba(69,26,3,0.1) 2px, transparent 2px, transparent 10px);
+  border: 4px solid #451a03;
+  border-radius: 18px;
+  box-shadow: 
+    0 12px 28px rgba(69, 26, 3, 0.45),
+    inset 0 2.5px 0 rgba(254, 243, 199, 0.5),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  z-index: 3;
+}
+
+/* Parafusos/Prego Metálico nas Laterais da Placa */
+.screw {
+  position: absolute;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #f3f4f6 25%, #9ca3af 65%, #374151 100%);
+  border: 1px solid #1f2937;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 1px #ffffff, 0 1.5px 3px rgba(0,0,0,0.4);
+  z-index: 4;
+}
+
+.screw-left {
+  left: 12px;
+}
+
+.screw-right {
+  right: 12px;
+}
+
+/* Texto Escrito na Madeira: Cor nitida e limpa, com tom de madeira talhada e luz limpa que vem do texto */
+.sign-text-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: 5;
+  text-align: center;
+  pointer-events: none;
+  line-height: 0.98;
+}
+
+.sign-line-1 {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.3rem, 8.5vw, 3.2rem);
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.5px;
+  text-transform: lowercase;
+  text-shadow: none;
+}
+
+.sign-line-2 {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(3rem, 11.5vw, 4.2rem);
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -1.5px;
+  text-shadow: none;
+  margin-top: -4px;
+}
+
+@keyframes neonPulse {
+  0% {
+    text-shadow:
+      0 0 4px #fff,
+      0 0 10px var(--neon-rosa),
+      0 0 20px var(--neon-rosa),
+      0 0 30px rgba(255, 42, 141, 0.6);
+  }
+  100% {
+    text-shadow:
+      0 0 8px #fff,
+      0 0 15px var(--neon-rosa),
+      0 0 30px var(--neon-rosa),
+      0 0 50px var(--neon-rosa),
+      0 0 70px rgba(255, 42, 141, 0.8);
+  }
+}
+
+/* Ilustração da Vaquinha Mascote e Barn */
+.mascot-container {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mascot-illustration {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  filter: drop-shadow(0 12px 16px rgba(217, 119, 6, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.mascot-illustration:hover {
+  transform: scale(1.03) rotate(1deg);
+}
+
+/* Card de Data, Horário e Local */
+.event-info-card {
+  background-color: var(--creme-card);
+  border: 2px solid var(--rosa-blush);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--sombra-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--rosa-chiclete), var(--madeira-tom), var(--rosa-chiclete));
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+
+.info-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background-color: var(--rosa-pastel);
+  border: 2px solid var(--rosa-blush);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--rosa-escuro);
+}
+
+.info-details h3 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+  color: var(--marrom-texto);
+  margin-bottom: 2px;
+}
+
+.info-details p {
+  font-size: 0.95rem;
+  color: var(--marrom-suave);
+  font-weight: 600;
+}
+
+/* Contador Regressivo (Countdown) */
+.countdown-section {
+  margin-top: 1rem;
+}
+
+.countdown-title {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  color: var(--rosa-escuro);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.countdown-box {
+  background: linear-gradient(180deg, #ffffff 0%, var(--rosa-pastel) 100%);
+  border: 2px solid var(--rosa-blush);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.2rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(244, 114, 182, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.countdown-box:hover {
+  transform: translateY(-2px);
+}
+
+.countdown-value {
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--rosa-escuro);
+  line-height: 1.2;
+}
+
+.countdown-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--marrom-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   5. BOTÕES & INTERAÇÕES (CTA Principal, Hovers Fofos)
+   -------------------------------------------------------------------------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--rosa-chiclete) 0%, var(--rosa-escuro) 100%);
+  color: #ffffff;
+  font-family: var(--fonte-titulo);
+  font-size: 1.2rem;
+  border: 3px solid #ffffff;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(219, 39, 119, 0.35);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: rotate(30deg);
+  transition: 0.5s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(219, 39, 119, 0.45);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.75rem 1.25rem;
+  background-color: #ffffff;
+  color: var(--marrom-texto);
+  font-family: var(--fonte-titulo);
+  font-size: 0.95rem;
+  border: 2px solid var(--madeira-borda);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--creme-amarelado);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(217, 119, 6, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   6. SEÇÃO FORMULÁRIO RSVP (CONFIRMAÇÃO DE PRESENÇA)
+   -------------------------------------------------------------------------- */
+.rsvp-section {
+  background-color: #ffffff;
+  border-top: 2px dashed var(--rosa-blush);
+  border-bottom: 2px dashed var(--rosa-blush);
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--fonte-titulo);
+  font-size: 0.85rem;
+  color: var(--rosa-escuro);
+  background-color: var(--rosa-pastel);
+  border: 1px solid var(--rosa-blush);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  color: var(--marrom-texto);
+  line-height: 1.25;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: 1rem;
+  color: var(--marrom-texto);
+  margin-bottom: 0.5rem;
+}
+
+.form-label span.req {
+  color: var(--rosa-escuro);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  font-family: var(--fonte-corpo);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--marrom-texto);
+  background-color: var(--creme-fundo);
+  border: 2px solid var(--rosa-blush);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--rosa-chiclete);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.2);
+}
+
+.form-control.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: #dc2626;
+  margin-top: 4px;
+  font-weight: 600;
+  display: none;
+}
+
+.form-control.error + .error-message {
+  display: block;
+}
+
+/* Toggle de Presença (Sim / Não) */
+.attendance-toggle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.toggle-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 1rem 0.75rem;
+  background-color: var(--creme-fundo);
+  border: 2px solid var(--rosa-blush);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toggle-icon {
+  font-size: 1.8rem;
+}
+
+.toggle-text {
+  font-family: var(--fonte-titulo);
+  font-size: 0.95rem;
+  color: var(--marrom-suave);
+}
+
+.toggle-option input[type="radio"]:checked + .toggle-card {
+  background-color: var(--rosa-pastel);
+  border-color: var(--rosa-chiclete);
+  box-shadow: 0 6px 16px rgba(244, 114, 182, 0.25);
+  transform: translateY(-2px);
+}
+
+.toggle-option input[type="radio"]:checked + .toggle-card .toggle-text {
+  color: var(--rosa-escuro);
+  font-weight: 700;
+}
+
+/* Campo Numérico de Acompanhantes (Stepper) */
+.companions-container {
+  background-color: var(--rosa-pastel);
+  border: 2px dashed var(--rosa-chiclete);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1rem;
+  animation: slideDown 0.3s ease forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stepper-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.75rem 0;
+}
+
+.btn-stepper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--rosa-chiclete);
+  background-color: #ffffff;
+  color: var(--rosa-escuro);
+  font-family: var(--fonte-titulo);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+}
+
+.btn-stepper:hover {
+  background-color: var(--rosa-chiclete);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.btn-stepper:active {
+  transform: scale(0.95);
+}
+
+.stepper-value {
+  font-family: var(--fonte-titulo);
+  font-size: 1.8rem;
+  color: var(--rosa-escuro);
+  min-width: 40px;
+  text-align: center;
+}
+
+.companions-summary {
+  font-size: 0.85rem;
+  color: var(--marrom-suave);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Feedback de Sucesso e Confetti Canvas */
+.rsvp-success-card {
+  display: none;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background-color: var(--rosa-pastel);
+  border: 3px solid var(--rosa-chiclete);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sombra-card);
+  animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes successPop {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.success-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.success-title {
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+  color: var(--rosa-escuro);
+  margin-bottom: 0.75rem;
+}
+
+.success-desc {
+  font-size: 1rem;
+  color: var(--marrom-texto);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* --------------------------------------------------------------------------
+   7. SEÇÃO TIMELINE / PROGRAMAÇÃO DA FESTA
+   -------------------------------------------------------------------------- */
+.timeline-section {
+  text-align: center;
+}
+
+.timeline-list {
+  position: relative;
+  max-width: 400px;
+  margin: 1.5rem auto 0 auto;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.timeline-list::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 31px;
+  width: 4px;
+  background: linear-gradient(180deg, var(--rosa-blush) 0%, var(--madeira-clara) 100%);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-badge {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  background-color: var(--rosa-chiclete);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--rosa-blush);
+  z-index: 2;
+  margin-top: 4px;
+}
+
+.timeline-content {
+  background-color: #ffffff;
+  border: 1px solid var(--rosa-blush);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  flex: 1;
+}
+
+.timeline-time {
+  font-family: var(--fonte-titulo);
+  font-size: 0.9rem;
+  color: var(--rosa-escuro);
+  display: block;
+}
+
+.timeline-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--marrom-texto);
+}
+
+/* --------------------------------------------------------------------------
+   8. EXTRAS (MIMO / PIX & CALENDÁRIO & GALERIA DA YUMI)
+   -------------------------------------------------------------------------- */
+.pix-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px dashed var(--madeira-borda);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  box-shadow: var(--sombra-card);
+}
+
+.pix-title {
+  font-family: var(--fonte-titulo);
+  font-size: 1.25rem;
+  color: var(--marrom-suave);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.pix-desc {
+  font-size: 0.9rem;
+  color: var(--marrom-texto);
+  margin-bottom: 1rem;
+}
+
+.pix-key-box {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid var(--madeira-borda);
+  border-radius: var(--radius-pill);
+  padding: 4px 6px 4px 14px;
+  margin-bottom: 0.75rem;
+}
+
+.pix-key-text {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--marrom-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  text-align: left;
+}
+
+/* Toast de Notificação */
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: var(--vaquinha-preto);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-family: var(--fonte-titulo);
+  font-size: 0.95rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   9. ANIMAÇÕES DE SCROLL REVEAL
+   -------------------------------------------------------------------------- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   10. PAINEL DE ADMINISTRAÇÃO DOS PAIS (OPCIONAL / DISCRETO)
+   -------------------------------------------------------------------------- */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.admin-modal-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.admin-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--rosa-pastel);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.admin-modal-title {
+  font-family: var(--fonte-titulo);
+  font-size: 1.25rem;
+  color: var(--marrom-texto);
+}
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--marrom-suave);
+}
+
+.guest-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.guest-list-table th, .guest-list-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.guest-list-table th {
+  background-color: var(--rosa-pastel);
+  color: var(--rosa-escuro);
+  font-family: var(--fonte-titulo);
+}
+
+/* --------------------------------------------------------------------------
+   11. RODAPÉ
+   -------------------------------------------------------------------------- */
+.footer {
+  text-align: center;
+  padding: 2.5rem 1.25rem;
+  background-color: var(--rosa-pastel);
+  border-top: 1px solid var(--rosa-blush);
+  position: relative;
+  margin-top: 2rem;
+}
+
+.footer-text {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  color: var(--rosa-escuro);
+  margin-bottom: 0.5rem;
+}
+
+.footer-sub {
+  font-size: 0.8rem;
+  color: var(--marrom-suave);
+  opacity: 0.8;
+}
+
+.btn-admin-link {
+  background: none;
+  border: none;
+  color: var(--marrom-suave);
+  font-size: 0.75rem;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.btn-admin-link:hover {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   12. MEDIA QUERIES (AJUSTES RESPONSIVOS FLUIDOS)
+   -------------------------------------------------------------------------- */
+@media (max-width: 400px) {
+  .app-container {
+    padding: 0;
+  }
+  .section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .countdown-grid {
+    gap: 4px;
+  }
+  .countdown-value {
+    font-size: 1.25rem;
+  }
+}

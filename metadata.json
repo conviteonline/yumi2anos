@@ -1,0 +1,6 @@
+{
+  "name": "Convite Yumi 2 Anos - Fazendinha",
+  "description": "Convite digital interativo com confirmação de presença (RSVP) para o aniversário de 2 anos da Yumi, tema Fazendinha Rosa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
