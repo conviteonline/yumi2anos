@@ -10,9 +10,9 @@ const EVENT_CONFIG = {
   childName: "Yumi",
   age: "2 Aninhos",
   // Defina a data e horário da festa (Formato: YYYY-MM-DDTHH:mm:ss)
-  partyDate: "2026-08-15T19:00:00",
+  partyDate: "2026-08-15T20:00:00",
   displayDate: "Sábado, 15 de Agosto de 2026",
-  displayTime: "A partir das 19:00h",
+  displayTime: "A partir das 20:00h",
   locationName: "Espaço Casa da Praia - Pajuçara",
   locationAddress: "Espaço Casa da Praia - Pajuçara (Link no Google Maps: https://maps.app.goo.gl/AJivSBrD2veDFERg8)",
   mapsUrl: "https://maps.app.goo.gl/AJivSBrD2veDFERg8",
@@ -319,7 +319,7 @@ function sendWhatsAppRSVP(data) {
       text += `📝 *Nome(s) do(s) Acompanhante(s):* ${data.companionNames}\n`;
     }
 
-    text += `\n📅 *Data:* ${EVENT_CONFIG.displayDate} às 19:00h\n` +
+    text += `\n📅 *Data:* ${EVENT_CONFIG.displayDate} (${EVENT_CONFIG.displayTime})\n` +
             `📍 *Local:* ${EVENT_CONFIG.locationName}\n` +
             `🔗 *Mapa:* ${EVENT_CONFIG.mapsUrl}\n\n` +
             `Mal posso esperar para comemorar com vocês! 🎉🎂`;
