@@ -110,11 +110,14 @@
       <!-- Card de Informações Básicas do Evento -->
       <div class="event-info-card reveal-on-scroll">
         <!-- Data -->
-        <div class="info-item">
+        <div class="info-item" style="align-items: flex-start;">
           <div class="info-icon-wrapper">📅</div>
-          <div class="info-details">
+          <div class="info-details" style="flex: 1;">
             <h3>Data</h3>
-            <p>Sábado, 24 de Outubro de 2026</p>
+            <p>Sábado, 15 de Agosto de 2026</p>
+            <button id="btn-add-calendar" class="btn-secondary" style="margin-top: 10px; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; font-size: 0.9rem;">
+              <span>📅 Adicionar ao Calendário</span>
+            </button>
           </div>
         </div>
 
@@ -123,16 +126,19 @@
           <div class="info-icon-wrapper">⏰</div>
           <div class="info-details">
             <h3>Horário</h3>
-            <p>A partir das 16:00 horas</p>
+            <p>A partir das 19:00 horas</p>
           </div>
         </div>
 
         <!-- Local -->
-        <div class="info-item">
+        <div class="info-item" style="align-items: flex-start;">
           <div class="info-icon-wrapper">📍</div>
-          <div class="info-details">
+          <div class="info-details" style="flex: 1;">
             <h3>Local</h3>
-            <p>Espaço Villa Kids - Fazendinha<br><small style="color:#78350f; font-weight:normal;">Rua das Flores, 123 - Jardins, São Paulo/SP</small></p>
+            <p>Espaço Casa da Praia - Pajuçara<br><small style="color:#78350f; font-weight:normal;">📍 A localização exata está no link do Google Maps abaixo!</small></p>
+            <a href="https://maps.app.goo.gl/AJivSBrD2veDFERg8" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="margin-top: 10px; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; font-size: 0.9rem;">
+              <span>📍 Abrir localização</span>
+            </a>
           </div>
         </div>
       </div>
@@ -179,53 +185,44 @@
          ==================================================================== -->
     <section class="section timeline-section reveal-on-scroll">
       <div class="section-header">
-        <span class="section-tag">Atrações da Fazendinha</span>
-        <h2 class="section-title">Programação do Dia 🐥</h2>
+        <h2 class="section-title">Programação do Dia 🌸</h2>
       </div>
 
       <div class="timeline-list">
         <div class="timeline-item">
           <div class="timeline-badge"></div>
           <div class="timeline-content">
-            <span class="timeline-time">16:00</span>
-            <span class="timeline-text">Chegada dos convidados & Recepção na Fazendinha 🌾</span>
+            <span class="timeline-time">19:00</span>
+            <span class="timeline-text">🌾 Início do Aniversário & Recepção dos Convidados</span>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-badge"></div>
           <div class="timeline-content">
-            <span class="timeline-time">17:00</span>
-            <span class="timeline-text">Recreação infantil, oficinas e brincadeiras com animais 🐄</span>
+            <span class="timeline-time">20:00</span>
+            <span class="timeline-text">🍲 Jantar Especial da Fazendinha</span>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-badge"></div>
           <div class="timeline-content">
-            <span class="timeline-time">18:30</span>
-            <span class="timeline-text">Hora do Parabéns e bolo da Yumi! 🎂✨</span>
+            <span class="timeline-time">21:00</span>
+            <span class="timeline-text">🎂 Hora do Parabéns e Bolo da Yumi! ✨</span>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-badge"></div>
           <div class="timeline-content">
-            <span class="timeline-time">19:30</span>
-            <span class="timeline-text">Encerramento e distribuição de lembrancinhas fofas 🎁</span>
+            <span class="timeline-time">23:30</span>
+            <span class="timeline-text">🎁 Encerramento & Agradecimentos</span>
           </div>
         </div>
       </div>
 
-      <!-- Botões de Ação Úteis (Adicionar ao Calendário & Como Chegar) -->
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 2rem; padding: 0 0.5rem;">
-        <a href="https://maps.google.com/?q=Rua+das+Flores+123+Sao+Paulo" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-          <span>📍 Abrir no Google Maps</span>
-        </a>
-        <button id="btn-add-calendar" class="btn-secondary">
-          <span>📅 Adicionar ao Calendário (.ics)</span>
-        </button>
-      </div>
+
     </section>
 
     <!-- ====================================================================
@@ -277,20 +274,27 @@
             <button type="button" class="btn-stepper" id="btn-companion-plus">+</button>
           </div>
           <div class="companions-summary" id="companion-summary">Apenas você (1 pessoa)</div>
+
+          <!-- Campo: Nomes dos Acompanhantes -->
+          <div class="form-group" id="companion-names-group" style="display: none; margin-top: 1rem; text-align: left;">
+            <label class="form-label" for="companion-names" style="margin-bottom: 0.3rem;">Nome(s) do(s) Acompanhante(s) <span class="req">*</span></label>
+            <input type="text" id="companion-names" class="form-control" placeholder="Ex: Maria da Silva, João Pedro...">
+            <span class="error-message" id="companion-names-error">Por favor, informe o nome dos acompanhantes.</span>
+          </div>
         </div>
 
-        <!-- Botão de Envio -->
-        <button type="submit" class="btn-primary" style="margin-top: 1rem;">
-          <span>Enviar Confirmação</span>
-          <span style="font-size: 1.3rem;">✨</span>
+        <!-- Botão de Envio (WhatsApp) -->
+        <button type="submit" class="btn-primary" style="margin-top: 1.2rem;">
+          <span>Enviar Confirmação pelo WhatsApp</span>
+          <span style="font-size: 1.3rem;">💬</span>
         </button>
       </form>
 
       <!-- Cartão de Sucesso Pós-Confirmação -->
       <div class="rsvp-success-card" id="rsvp-success-card">
         <div class="success-icon">🎉</div>
-        <h3 class="success-title">Presença Confirmada!</h3>
-        <p class="success-desc">Mal podemos esperar para celebrar com você os 2 aninhos da Yumi na Fazendinha! 💕🌷</p>
+        <h3 class="success-title">Confirmação Enviada!</h3>
+        <p class="success-desc">Sua confirmação foi preparada e enviada para o WhatsApp da família! Mal podemos esperar para celebrar com você os 2 aninhos da Yumi! 💕🌷</p>
         <button type="button" class="btn-secondary" onclick="document.getElementById('rsvp-success-card').style.display='none'; document.getElementById('rsvp-form').style.display='block';">
           <span>Editar minha resposta</span>
         </button>
@@ -326,7 +330,7 @@
               <th>Nome</th>
               <th>Vai?</th>
               <th>Total</th>
-              <th>Observação</th>
+              <th>Acompanhantes</th>
             </tr>
           </thead>
           <tbody id="guest-table-body">

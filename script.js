@@ -10,13 +10,13 @@ const EVENT_CONFIG = {
   childName: "Yumi",
   age: "2 Aninhos",
   // Defina a data e horário da festa (Formato: YYYY-MM-DDTHH:mm:ss)
-  partyDate: "2026-10-24T16:00:00",
-  displayDate: "Sábado, 24 de Outubro de 2026",
-  displayTime: "A partir das 16:00h",
-  locationName: "Espaço Villa Kids - Fazendinha",
-  locationAddress: "Rua das Flores, 123 - Jardins, São Paulo - SP",
-  mapsUrl: "https://maps.google.com/?q=Rua+das+Flores+123+Sao+Paulo",
-  pixKey: "000.111.222-33", // Chave Pix para mimo/presente
+  partyDate: "2026-08-15T19:00:00",
+  displayDate: "Sábado, 15 de Agosto de 2026",
+  displayTime: "A partir das 19:00h",
+  locationName: "Espaço Casa da Praia - Pajuçara",
+  locationAddress: "Espaço Casa da Praia - Pajuçara (Link no Google Maps: https://maps.app.goo.gl/AJivSBrD2veDFERg8)",
+  mapsUrl: "https://maps.app.goo.gl/AJivSBrD2veDFERg8",
+  whatsappNumber: "5593996589790",
   localStorageKey: "yumi_fazendinha_rsvps"
 };
 
@@ -154,13 +154,16 @@ function spawnExtraBalloons() {
 }
 
 /* --------------------------------------------------------------------------
-   4. FORMULÁRIO RSVP & VALIDAÇÃO & SALVAMENTO (localStorage)
+   4. FORMULÁRIO RSVP & VALIDAÇÃO & ENVIO VIA WHATSAPP & SALVAMENTO (localStorage)
    -------------------------------------------------------------------------- */
 function initRSVPForm() {
   const form = document.getElementById("rsvp-form");
   const radioSim = document.getElementById("attending-yes");
   const radioNao = document.getElementById("attending-no");
   const companionsSection = document.getElementById("companions-section");
+  const companionNamesGroup = document.getElementById("companion-names-group");
+  const companionNamesInput = document.getElementById("companion-names");
+  const companionNamesError = document.getElementById("companion-names-error");
   const btnMinus = document.getElementById("btn-companion-minus");
   const btnPlus = document.getElementById("btn-companion-plus");
   const companionValueEl = document.getElementById("companion-count");
@@ -205,10 +208,14 @@ function initRSVPForm() {
     companionValueEl.innerText = companionCount;
     if (companionCount === 0) {
       companionSummaryEl.innerText = "Apenas você (1 pessoa)";
+      if (companionNamesGroup) companionNamesGroup.style.display = "none";
+      if (companionNamesInput) companionNamesInput.value = "";
     } else if (companionCount === 1) {
       companionSummaryEl.innerText = "Você + 1 acompanhante (2 pessoas)";
+      if (companionNamesGroup) companionNamesGroup.style.display = "block";
     } else {
       companionSummaryEl.innerText = `Você + ${companionCount} acompanhantes (${companionCount + 1} pessoas)`;
+      if (companionNamesGroup) companionNamesGroup.style.display = "block";
     }
   }
 
@@ -218,7 +225,6 @@ function initRSVPForm() {
 
     const nameInput = document.getElementById("guest-name");
     const nameError = document.getElementById("name-error");
-    const notesInput = document.getElementById("guest-notes");
     
     let isValid = true;
 
@@ -232,40 +238,47 @@ function initRSVPForm() {
       if (nameError) nameError.style.display = "none";
     }
 
+    const isAttending = radioSim && radioSim.checked;
+
+    // Validação dos Nomes dos Acompanhantes se tiver acompanhantes e for comparecer
+    if (isAttending && companionCount > 0 && companionNamesInput) {
+      if (!companionNamesInput.value.trim()) {
+        companionNamesInput.classList.add("error");
+        if (companionNamesError) companionNamesError.style.display = "block";
+        isValid = false;
+      } else {
+        companionNamesInput.classList.remove("error");
+        if (companionNamesError) companionNamesError.style.display = "none";
+      }
+    }
+
     if (!isValid) return;
 
-    const isAttending = radioSim.checked;
+    const companionNamesVal = (isAttending && companionCount > 0 && companionNamesInput) 
+      ? companionNamesInput.value.trim() 
+      : "";
+
     const guestData = {
       id: Date.now(),
       name: nameInput.value.trim(),
       attending: isAttending ? "Sim" : "Não",
       companions: isAttending ? companionCount : 0,
+      companionNames: companionNamesVal,
       totalPeople: isAttending ? companionCount + 1 : 0,
-      notes: notesInput ? notesInput.value.trim() : "",
       createdAt: new Date().toLocaleString("pt-BR")
     };
 
     const btnSubmit = form.querySelector('button[type="submit"]');
     if (btnSubmit) {
       btnSubmit.disabled = true;
-      btnSubmit.innerHTML = `<span>Enviando... 🌸</span>`;
+      btnSubmit.innerHTML = `<span>Redirecionando para o WhatsApp... 💬</span>`;
     }
 
-    /* ----------------------------------------------------------------------
-       NOTA DE INTEGRAÇÃO COM BACKEND FUTURO (Ex: Google Sheets / Apps Script)
-       ----------------------------------------------------------------------
-       Se você quiser enviar as confirmações para uma planilha do Google Sheets 
-       ou banco de dados no futuro, substitua o bloco abaixo por um fetch:
-
-       fetch('SUA_URL_DO_GOOGLE_APPS_SCRIPT', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(guestData)
-       }).then(response => ...);
-       ---------------------------------------------------------------------- */
-
-    // Salvar no localStorage
+    // Salvar no localStorage local
     saveRSVPToLocalStorage(guestData);
+
+    // Formatar e Abrir Mensagem do WhatsApp
+    sendWhatsAppRSVP(guestData);
 
     setTimeout(() => {
       // Exibir cartão de sucesso animado
@@ -282,8 +295,44 @@ function initRSVPForm() {
       if (successCard) {
         successCard.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-    }, 800);
+
+      if (btnSubmit) {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = `<span>Enviar Confirmação pelo WhatsApp</span><span style="font-size: 1.3rem;">💬</span>`;
+      }
+    }, 1000);
   });
+}
+
+function sendWhatsAppRSVP(data) {
+  const number = EVENT_CONFIG.whatsappNumber;
+  let text = "";
+
+  if (data.attending === "Sim") {
+    text = `🌸 *CONFIRMAÇÃO DE PRESENÇA - FAZENDINHA DA YUMI* 🌾\n\n` +
+           `Olá! Gostaria de confirmar minha presença no aniversário de 2 Anos da Yumi! 💕\n\n` +
+           `👤 *Nome do Convidado:* ${data.name}\n` +
+           `✅ *Vai comparecer?* Sim, vou com certeza!\n` +
+           `👥 *Número de Acompanhantes:* ${data.companions} (${data.totalPeople} pessoa(s) no total)\n`;
+
+    if (data.companions > 0 && data.companionNames) {
+      text += `📝 *Nome(s) do(s) Acompanhante(s):* ${data.companionNames}\n`;
+    }
+
+    text += `\n📅 *Data:* ${EVENT_CONFIG.displayDate} às 19:00h\n` +
+            `📍 *Local:* ${EVENT_CONFIG.locationName}\n` +
+            `🔗 *Mapa:* ${EVENT_CONFIG.mapsUrl}\n\n` +
+            `Mal posso esperar para comemorar com vocês! 🎉🎂`;
+  } else {
+    text = `🌸 *CONFIRMAÇÃO DE PRESENÇA - FAZENDINHA DA YUMI* 🌾\n\n` +
+           `Olá! Infelizmente não poderei comparecer ao aniversário de 2 Anos da Yumi. 💔\n\n` +
+           `👤 *Nome do Convidado:* ${data.name}\n` +
+           `❌ *Vai comparecer?* Não poderei ir\n\n` +
+           `Desejo uma festa linda e cheia de alegrias para a Yumi! 🎈✨`;
+  }
+
+  const waUrl = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+  window.open(waUrl, "_blank");
 }
 
 function saveRSVPToLocalStorage(data) {
@@ -546,7 +595,7 @@ function initAdminModal() {
         <td><strong>${escapeHtml(item.name)}</strong></td>
         <td><span style="color: ${item.attending === "Sim" ? "#16a34a" : "#dc2626"}; font-weight: bold;">${item.attending}</span></td>
         <td>${item.totalPeople || 1}</td>
-        <td><small>${escapeHtml(item.notes || "-")}</small></td>
+        <td><small>${escapeHtml(item.companionNames || "-")}</small></td>
       `;
       guestTableBody.appendChild(tr);
     });
