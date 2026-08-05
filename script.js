@@ -312,7 +312,7 @@ function sendWhatsAppRSVP(data) {
     text = `🌸 *CONFIRMAÇÃO DE PRESENÇA - FAZENDINHA DA YUMI* 🌾\n\n` +
            `Olá! Gostaria de confirmar minha presença no aniversário de 2 Anos da Yumi! 💕\n\n` +
            `👤 *Nome do(a) Convidado(a):* ${data.name}\n` +
-           `✅ *Vai comparecer?* Sim, vou com certeza!\n` +
+           `✅ *Vai comparecer?* Sim, eu vou\n` +
            `👥 *Número de Acompanhantes:* ${data.companions} (${data.totalPeople} pessoa(s) no total)\n`;
 
     if (data.companions > 0 && data.companionNames) {
