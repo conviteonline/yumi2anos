@@ -379,7 +379,7 @@ body {
   width: 92%;
   max-width: 350px;
   margin: 0 auto 0.5rem auto;
-  padding-top: 36px; /* Espaço para a legenda em cima da placa */
+  padding-top: 8px; /* Espaço para a legenda em cima da placa */
   transform-origin: 50% -100px; /* Pivô do balanço no topo fora da tela */
   animation: gentleWindSway 6s ease-in-out infinite;
 }
@@ -397,12 +397,12 @@ body {
   }
 }
 
-/* Cordas de Suporte de Cânhamo - Estendem-se até sumir no topo da tela */
+/* Cordas de Suporte de Cânhamo - Estendem-se até encostar na placa de madeira */
 .rope-left, .rope-right {
   position: absolute;
   top: -160px; /* Vai além do topo da página para sumir off-screen */
   width: 8px;
-  height: 230px; /* Comprimento total garantindo que não veja o fim da corda */
+  height: 210px; /* Comprimento total garantindo que a ponta da corda encoste no topo da placa */
   background: repeating-linear-gradient(
     45deg,
     #d97706,
@@ -412,7 +412,7 @@ body {
   );
   border-radius: 4px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
-  z-index: 2;
+  z-index: 4;
 }
 
 .rope-left {
@@ -423,7 +423,7 @@ body {
   right: 28px;
 }
 
-/* Subtítulo: "Você está convidado para" (em cima da placa, entre as cordas, sem caixa ou sombra) */
+/* Subtítulo: "Você está convidado(a) para" (em cima da placa, entre as cordas) */
 .invited-text {
   font-family: var(--fonte-titulo);
   font-size: 0.88rem;
@@ -431,7 +431,8 @@ body {
   text-transform: uppercase;
   letter-spacing: 1.2px;
   font-weight: 700;
-  margin-bottom: 8px;
+  line-height: 1.25;
+  margin-bottom: 4px;
   z-index: 5;
   background: transparent !important;
   box-shadow: none !important;

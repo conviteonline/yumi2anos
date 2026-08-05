@@ -311,7 +311,7 @@ function sendWhatsAppRSVP(data) {
   if (data.attending === "Sim") {
     text = `🌸 *CONFIRMAÇÃO DE PRESENÇA - FAZENDINHA DA YUMI* 🌾\n\n` +
            `Olá! Gostaria de confirmar minha presença no aniversário de 2 Anos da Yumi! 💕\n\n` +
-           `👤 *Nome do Convidado:* ${data.name}\n` +
+           `👤 *Nome do(a) Convidado(a):* ${data.name}\n` +
            `✅ *Vai comparecer?* Sim, vou com certeza!\n` +
            `👥 *Número de Acompanhantes:* ${data.companions} (${data.totalPeople} pessoa(s) no total)\n`;
 
@@ -326,7 +326,7 @@ function sendWhatsAppRSVP(data) {
   } else {
     text = `🌸 *CONFIRMAÇÃO DE PRESENÇA - FAZENDINHA DA YUMI* 🌾\n\n` +
            `Olá! Infelizmente não poderei comparecer ao aniversário de 2 Anos da Yumi. 💔\n\n` +
-           `👤 *Nome do Convidado:* ${data.name}\n` +
+           `👤 *Nome do(a) Convidado(a):* ${data.name}\n` +
            `❌ *Vai comparecer?* Não poderei ir\n\n` +
            `Desejo uma festa linda e cheia de alegrias para a Yumi! 🎈✨`;
   }
